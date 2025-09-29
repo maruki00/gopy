@@ -8,7 +8,7 @@ import (
 )
 
 func Unpack(val string) (uint32, error) {
-	// pattern \xAB -> 4 symboles
+	// pattern (\xAB)+ -> 4 symboles
 	if len(val)%4 != 0 {
 		return 0, errors.New("invalid data")
 	}
@@ -21,7 +21,7 @@ func Unpack(val string) (uint32, error) {
 }
 
 func UnpackLong(val string) (uint64, error) {
-	// pattern \xAB -> 4 symboles
+	// pattern (\xAB)+ -> 4 symboles
 	if len(val)%4 != 0 {
 		return 0, errors.New("invalid data")
 	}
@@ -34,7 +34,7 @@ func UnpackLong(val string) (uint64, error) {
 }
 
 func Unpack2Hex(val string) (string, error) {
-	// pattern \xAB -> 4 symboles
+	// pattern (\xAB)+ -> 4 symboles
 	if len(val)%4 != 0 {
 		return "", errors.New("invalid data")
 	}
