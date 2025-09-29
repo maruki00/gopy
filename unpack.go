@@ -27,22 +27,14 @@ func Unpack2Hex(val string) (string, error) {
 	return hex.EncodeToString(_bytesVal), nil
 }
 
-func Unpack(val string) (uint32, error) {
+func UnpackLong(val string) (uint64, error) {
 	if len(val)%4 != 0 {
 		return 0, errors.New("invalid data")
 	}
 	_bytesVal := []byte(val)
 
-	var v uint32
+	var v uint64
 	binary.Decode(_bytesVal, binary.LittleEndian, &v)
 	fmt.Println(v, _bytesVal)
 	return v, nil
-}
-
-func Unpack2Hex(val string) (string, error) {
-	if len(val)%4 != 0 {
-		return "", errors.New("invalid data")
-	}
-	_bytesVal := []byte(val)
-	return hex.EncodeToString(_bytesVal), nil
 }
