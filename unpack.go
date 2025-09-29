@@ -1,6 +1,7 @@
 package gopy
 
 import (
+	"encoding/binary"
 	"errors"
 	"fmt"
 )
@@ -9,13 +10,14 @@ import (
 // 	return 0, nil
 // }
 
-func Unpack(val string) (int64, error) {
+func Unpack(val string) (uint32, error) {
 	if len(val)%4 != 0 {
 		return 0, errors.New("invalid data")
 	}
-	for i, j := range []byte(val) {
-		fmt.Println(i, j)
-	}
+	_bytesVal := []byte(val)
 
-	return 0, nil
+	var v uint32
+	binary.Decode(_bytesVal, binary.LittleEndian, &v)
+	fmt.Println(v, _bytesVal)
+	return v, nil
 }
