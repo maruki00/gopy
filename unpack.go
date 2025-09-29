@@ -10,8 +10,8 @@ func UnpackLong(val int64) (int64, error) {
 	var out strings.Builder
 	dBytes := make([]byte, 8)
 	binary.Encode(dBytes, binary.LittleEndian, val)
-	for _, j := range dBytes {
-		out.WriteString(fmt.Sprintf("\\x%.2x", j))
+	for _, byte := range dBytes {
+		out.WriteString(fmt.Sprintf("\\x%.2x", byte))
 	}
 	fmt.Println(out.String())
 }
