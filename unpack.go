@@ -2,6 +2,7 @@ package gopy
 
 import (
 	"encoding/binary"
+	"encoding/hex"
 	"errors"
 	"fmt"
 )
@@ -20,4 +21,12 @@ func Unpack(val string) (uint32, error) {
 	binary.Decode(_bytesVal, binary.LittleEndian, &v)
 	fmt.Println(v, _bytesVal)
 	return v, nil
+}
+
+func Unpack2Hex(val string) (string, error) {
+	if len(val)%4 != 0 {
+		return "", errors.New("invalid data")
+	}
+	_bytesVal := []byte(val)
+	return hex.EncodeToString(_bytesVal), nil
 }
