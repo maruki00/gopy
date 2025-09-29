@@ -1,28 +1,21 @@
 package gopy
 
 import (
-	"encoding/binary"
+	"errors"
 	"fmt"
-	"strings"
 )
 
-func UnpackLong(val int64) (int64, error) {
-	var out strings.Builder
-	dBytes := make([]byte, 8)
-	binary.Encode(dBytes, binary.LittleEndian, val)
-	for _, byte := range dBytes {
-		out.WriteString(fmt.Sprintf("\\x%.2x", byte))
-	}
-	fmt.Println(out.String())
-}
+// func UnpackLong(val string) (int64, error) {
+// 	return 0, nil
+// }
 
-func Unpack(val int32) (int64, error) {
-	var out strings.Builder
-	dBytes := make([]byte, 4)
-	binary.Encode(dBytes, binary.LittleEndian, val)
-	for _, byte := range dBytes {
-		out.WriteString(fmt.Sprintf("\\x%.2x", byte))
+func Unpack(val string) (int64, error) {
+	if len(val)%4 != 0 {
+		return 0, errors.New("invalid data")
 	}
-	fmt.Println(out.String())
+	for i, j := range []byte(val) {
+		fmt.Println(i, j)
+	}
+
 	return 0, nil
 }
